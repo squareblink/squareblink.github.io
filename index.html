@@ -1,1 +1,110 @@
-<h1>SQUARE BLINK</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squareblink - Coming Soon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="squareblink-logo.png" alt="Squareblink Logo" class="logo">            
+        </header>
+        <section class="hero">        
+            <div class="fade-in">
+                <h1>
+                    Futures
+                    <span class="gradient-text"> That Impact</span>                    
+                </h1>
+                <h1>                    
+                    <span class="gradient-text-soon"> LAUNCHING SOON</span>
+                </h1>
+
+                
+                <p>
+                    SquareBlink builds intelligent futures that directly impact your bottom line. 
+                    We provide comprehensive AI services designed to help companies save money, 
+                    achieve faster market entry, and generate more business.
+                </p>               
+            </div>        
+        </section>
+        <section class="coming-soon">
+            <div class="countdown">
+                <div>
+                    <span id="days">00</span>
+                    <span>Days</span>
+                </div>
+                <div>
+                    <span id="hours">00</span>
+                    <span>Hours</span>
+                </div>
+                <div>
+                    <span id="minutes">00</span>
+                    <span>Minutes</span>
+                </div>
+                <div>
+                    <span id="seconds">00</span>
+                    <span>Seconds</span>
+                </div>
+            </div>
+            <div class="stay-connected">
+                <p>Get notified when we launch:</p>
+                <form id="subscribe-form">
+                    <input type="email" placeholder="Your Business Email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        <footer>
+            <p>&copy; 2025 Squareblink. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set your launch date and time. Example: December 31, 2025, 00:00:00 EST (-05:00)
+            const targetDate = new Date("2025-06-30T00:00:00-05:00").getTime();
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+
+                if (difference < 0) {
+                    clearInterval(interval);
+                    document.querySelector('.coming-soon h2').innerText = "We Are Live!";
+                    document.querySelector('.coming-soon p').innerText = "Welcome to the new Squareblink website. Explore our innovative AI solutions!";
+                    document.querySelector('.countdown').style.display = 'none';
+                    document.querySelector('.stay-connected').style.display = 'none';
+                }
+            };
+
+            updateCountdown();
+            const interval = setInterval(updateCountdown, 1000);
+
+            // Simple form submission alert (replace with real mailing list integration)
+            document.querySelector('#subscribe-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input');
+                const email = emailInput.value;
+                alert(`Thank you for subscribing with: ${email}! We'll notify you on launch.`);
+                emailInput.value = ''; // Clear the input field
+            });
+
+            // Dynamically set footer year (if you use this in an actual Jekyll site, Jekyll can do this with {{ site.time | date: "%Y" }})
+            const currentYear = new Date().getFullYear();
+            document.querySelector('footer p').innerText = `© ${currentYear} Squareblink. All rights reserved.`;
+        });
+    </script>
+</body>
+</html>
